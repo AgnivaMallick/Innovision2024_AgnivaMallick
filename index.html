@@ -2,19 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>TO-DO list</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="buttons">
-    <h1>TO-DO list</h1>
-    <div><input type="radio">sleep</div>
-    <div><input type="radio">sleep part 2 </div>
-    <div><input type="radio">the return of sleep </div>
-    <div><input type="radio"> </div>
-    <div><input type="radio"> </div>
-</div>
-    
+    <div class="container">
+        <h1 class="title">To-Do List</h1>
+        <div class="todo-input">
+            <input type="text" id="new-task" placeholder="Add a new task...">
+            <button onclick="addTask()">Add</button>
+        </div>
+        <ul id="task-list"></ul>
+    </div>
+
+    <script>
+        function addTask() {
+            var taskInput = document.getElementById("new-task");
+            var taskValue = taskInput.value.trim();
+
+            if (taskValue !== "") {
+                var li = document.createElement("li");
+                li.textContent = taskValue;
+
+                
+                li.onclick = function() {
+                    li.classList.toggle("completed");
+                };
+
+                
+                var removeBtn = document.createElement("button");
+                removeBtn.textContent = "Remove";
+                removeBtn.classList.add("remove-btn");
+                removeBtn.onclick = function() {
+                    li.remove();
+                };
+                li.appendChild(removeBtn);
+
+                document.getElementById("task-list").appendChild(li);
+                taskInput.value = ""; 
+            }
+        }
+    </script>
 </body>
 </html>
